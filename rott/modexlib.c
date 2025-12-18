@@ -99,6 +99,9 @@ void GraphicsMode(void)
 	{
 		Error("Could not initialize SDL\n");
 	}
+#ifdef __PS2__
+    SDL_SetHint(SDL_HINT_PS2_DYNAMIC_VSYNC, "1");
+#endif
 
 	if (sdl_fullscreen)
 	{
@@ -111,7 +114,9 @@ void GraphicsMode(void)
 	SDL_SetWindowMinimumSize(screen, iGLOBAL_SCREENWIDTH, iGLOBAL_SCREENHEIGHT);
 	SDL_SetWindowTitle(screen, PACKAGE_STRING);
 
+#ifndef __PS2__
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "nearest");
+#endif
 	renderer = SDL_CreateRenderer(screen, -1, SDL_RENDERER_PRESENTVSYNC);
 	if (!renderer)
 	{

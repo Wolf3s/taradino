@@ -78,8 +78,12 @@ if (HAVE_DIRENT_H)
 	target_compile_definitions(taradino PRIVATE HAVE_DIRENT_H)
 endif()
 
+if(PS2)
+	set(TARADINO_EXEC taradino.elf)
+else()
 if(NOT DEFINED TARADINO_EXEC)
 	set(TARADINO_EXEC taradino)
+endif()
 endif()
 
 set_target_properties(taradino PROPERTIES OUTPUT_NAME ${TARADINO_EXEC})
