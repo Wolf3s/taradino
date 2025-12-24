@@ -148,6 +148,29 @@ SDL_Window *VL_GetVideoWindow(void);
 char *ROTTMAPS, *ORIG_ROTTMAPS;
 char *BATTMAPS;
 
+#ifdef __PS2__
+SDL_GameController *gameController;
+
+void OpenController()
+{
+    SDL_InitSubSystem (SDL_INIT_GAMECONTROLLER);
+    for (int i = 0; i < SDL_NumJoysticks(); ++i) {
+        if (SDL_IsGameController(i)) {
+            gameController = SDL_GameControllerOpen(i);
+        }
+    }
+}
+
+void CloseController()
+{
+    if (SDL_GameControllerGetAttached(gameController)) {
+        SDL_GameControllerClose(gameController);
+        gameController = NULL;
+    }
+}
+
+#endif
+
 int main(int argc, char *argv[])
 {
 	_argc = argc;
@@ -218,6 +241,10 @@ int main(int argc, char *argv[])
 	Z_Init(50000, 1000000);
 
 	IN_Startup();
+
+#ifdef __PS2__
+    OpenController();
+#endif
 
 	InitializeGameCommands();
 	if (standalone == false)

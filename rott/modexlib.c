@@ -114,9 +114,7 @@ void GraphicsMode(void)
 	SDL_SetWindowMinimumSize(screen, iGLOBAL_SCREENWIDTH, iGLOBAL_SCREENHEIGHT);
 	SDL_SetWindowTitle(screen, PACKAGE_STRING);
 
-#ifndef __PS2__
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "nearest");
-#endif
 	renderer = SDL_CreateRenderer(screen, -1, SDL_RENDERER_PRESENTVSYNC);
 	if (!renderer)
 	{
@@ -131,7 +129,15 @@ void GraphicsMode(void)
 	sdl_surface = SDL_CreateRGBSurface(0, iGLOBAL_SCREENWIDTH,
 									   iGLOBAL_SCREENHEIGHT, 8, 0, 0, 0, 0);
 	SDL_FillRect(sdl_surface, NULL, 0);
+#ifdef __PS2__
+	argbbuffer = SDL_CreateRGBSurfaceWithFormatFrom(
+		NULL, iGLOBAL_SCREENWIDTH, iGLOBAL_SCREENHEIGHT, 0, 0,
+		SDL_PIXELFORMAT_ABGR1555);
 
+	texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ABGR1555,
+								SDL_TEXTUREACCESS_STREAMING,
+								iGLOBAL_SCREENWIDTH, iGLOBAL_SCREENHEIGHT);
+#else
 	argbbuffer = SDL_CreateRGBSurfaceWithFormatFrom(
 		NULL, iGLOBAL_SCREENWIDTH, iGLOBAL_SCREENHEIGHT, 0, 0,
 		SDL_GetWindowPixelFormat(screen));
@@ -139,7 +145,7 @@ void GraphicsMode(void)
 	texture = SDL_CreateTexture(renderer, SDL_GetWindowPixelFormat(screen),
 								SDL_TEXTUREACCESS_STREAMING,
 								iGLOBAL_SCREENWIDTH, iGLOBAL_SCREENHEIGHT);
-
+#endif
 	SetShowCursor(!sdl_fullscreen);
 
 	const char *driver = SDL_GetCurrentVideoDriver();

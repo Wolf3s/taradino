@@ -11,11 +11,17 @@
 #include "rt_util.h"
 #include "music.h"
 
+#ifdef __PS2__
+static music_module_t *music_modules[] = { NULL,
+										   &adl_music_module
+};
+#else
 static music_module_t *music_modules[] = { NULL, &sdl_music_module,
 #if defined(HAVE_ADLMIDI)
 										   &adl_music_module
 #endif
 };
+#endif
 
 static music_module_t *music_module;
 const int num_music_modules = arrlen(music_modules);
