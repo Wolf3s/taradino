@@ -118,7 +118,11 @@ void GraphicsMode(void)
 	renderer = SDL_CreateRenderer(screen, -1, SDL_RENDERER_PRESENTVSYNC);
 	if (!renderer)
 	{
+#ifdef __PS2__
+		renderer = SDL_CreateRenderer(screen, -1, SDL_RENDERER_ACCELERATED);
+#else
 		renderer = SDL_CreateRenderer(screen, -1, SDL_RENDERER_SOFTWARE);
+#endif
 	}
 	SDL_RenderSetLogicalSize(renderer, 640, 480);
 
