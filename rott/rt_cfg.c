@@ -839,7 +839,11 @@ void SetConfigDefaultValues(void)
 	joystickenabled = false;
 	joypadenabled = false;
 	joystickport = 0;
+#ifdef __PS2__ // Temporary hack til release v1.0
+	viewsize = 5;
+#else
 	viewsize = 7;
+#endif
 	mouseadjustment = 5;
 	gammaindex = 0;
 	gamestate.violence = 3;

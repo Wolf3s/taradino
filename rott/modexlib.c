@@ -120,15 +120,15 @@ void GraphicsMode(void)
 	SDL_SetWindowMinimumSize(screen, iGLOBAL_SCREENWIDTH, iGLOBAL_SCREENHEIGHT);
 #endif
 	SDL_SetWindowTitle(screen, PACKAGE_STRING);
-#ifndef __PS2__
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "nearest");
-#endif
 	renderer = SDL_CreateRenderer(screen, -1, SDL_RENDERER_PRESENTVSYNC);
 	if (!renderer)
 	{
 		renderer = SDL_CreateRenderer(screen, -1, SDL_RENDERER_SOFTWARE);
 	}
-#ifndef __PS2__
+#ifdef __PS2__
+	SDL_RenderSetLogicalSize(renderer, 320, 200);
+#else
 	SDL_RenderSetLogicalSize(renderer, 640, 480);
 #endif
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);

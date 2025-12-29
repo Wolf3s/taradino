@@ -235,7 +235,6 @@ enum
 };
 
 extern SDL_GameController *gameController;
-extern SDL_Sensor *vitaGyro;
 
 // all kind of control related stuff
 int16_t controllerLeftXAxis = 0;

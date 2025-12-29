@@ -591,9 +591,7 @@ CP_itemtype OptionsMenu[] = {
 	{ 1, "fandc\0", 'F', { NULL } },
 	{ 1, "double\0", 'D', { .vv = CP_DoubleClickSpeed } },
 	{ 1, "menuspd\0", 'M', { .vv = MenuFlipSpeed } },
-#ifndef __PS2__
 	{ 1, "detail\0", 'D', { .vv = CP_DetailMenu } },
-#endif
 	{ 1, "vlevel\0", 'V', { .vv = CP_ViolenceMenu } },
 	{ 1, "\0", 'S', { .vv = CP_ScreenSize } }
 };
