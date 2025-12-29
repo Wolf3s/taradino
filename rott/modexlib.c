@@ -101,31 +101,36 @@ void GraphicsMode(void)
 	}
 #ifdef __PS2__
     SDL_SetHint(SDL_HINT_PS2_DYNAMIC_VSYNC, "1");
+	SDL_SetHint(SDL_HINT_PS2_GS_WIDTH, "640");
+	SDL_SetHint(SDL_HINT_PS2_GS_HEIGHT, "480");
 #endif
 
 	if (sdl_fullscreen)
 	{
 		flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
 	}
-
+#ifdef __PS2__
+	screen =
+		SDL_CreateWindow(NULL, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+						 iGLOBAL_SCREENWIDTH, iGLOBAL_SCREENHEIGHT, flags);
+#else
 	screen =
 		SDL_CreateWindow(NULL, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
 						 iGLOBAL_SCREENWIDTH, iGLOBAL_SCREENHEIGHT, flags);
 	SDL_SetWindowMinimumSize(screen, iGLOBAL_SCREENWIDTH, iGLOBAL_SCREENHEIGHT);
+#endif
 	SDL_SetWindowTitle(screen, PACKAGE_STRING);
-
+#ifndef __PS2__
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "nearest");
+#endif
 	renderer = SDL_CreateRenderer(screen, -1, SDL_RENDERER_PRESENTVSYNC);
 	if (!renderer)
 	{
-#ifdef __PS2__
-		renderer = SDL_CreateRenderer(screen, -1, SDL_RENDERER_ACCELERATED);
-#else
 		renderer = SDL_CreateRenderer(screen, -1, SDL_RENDERER_SOFTWARE);
-#endif
 	}
+#ifndef __PS2__
 	SDL_RenderSetLogicalSize(renderer, 640, 480);
-
+#endif
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 	SDL_RenderClear(renderer);
 	SDL_RenderPresent(renderer);
@@ -133,15 +138,6 @@ void GraphicsMode(void)
 	sdl_surface = SDL_CreateRGBSurface(0, iGLOBAL_SCREENWIDTH,
 									   iGLOBAL_SCREENHEIGHT, 8, 0, 0, 0, 0);
 	SDL_FillRect(sdl_surface, NULL, 0);
-#ifdef __PS2__
-	argbbuffer = SDL_CreateRGBSurfaceWithFormatFrom(
-		NULL, iGLOBAL_SCREENWIDTH, iGLOBAL_SCREENHEIGHT, 0, 0,
-		SDL_PIXELFORMAT_ABGR1555);
-
-	texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ABGR1555,
-								SDL_TEXTUREACCESS_STREAMING,
-								iGLOBAL_SCREENWIDTH, iGLOBAL_SCREENHEIGHT);
-#else
 	argbbuffer = SDL_CreateRGBSurfaceWithFormatFrom(
 		NULL, iGLOBAL_SCREENWIDTH, iGLOBAL_SCREENHEIGHT, 0, 0,
 		SDL_GetWindowPixelFormat(screen));
@@ -149,7 +145,6 @@ void GraphicsMode(void)
 	texture = SDL_CreateTexture(renderer, SDL_GetWindowPixelFormat(screen),
 								SDL_TEXTUREACCESS_STREAMING,
 								iGLOBAL_SCREENWIDTH, iGLOBAL_SCREENHEIGHT);
-#endif
 	SetShowCursor(!sdl_fullscreen);
 
 	const char *driver = SDL_GetCurrentVideoDriver();

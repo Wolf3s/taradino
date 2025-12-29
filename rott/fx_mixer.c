@@ -218,7 +218,11 @@ int FX_StopSound(int handle)
 
 // Calculate slice size, the result must be a power of two.
 
+#ifdef __PS2__
+static int snd_samplerate = 11025;
+#else
 static int snd_samplerate = 44100;
+#endif
 
 static int GetSliceSize(void)
 {

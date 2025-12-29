@@ -5,9 +5,13 @@
 #include "modexlib.h"
 
 // typedef unsigned char byte;
-
+#ifdef __PS2__
+int iGLOBAL_SCREENWIDTH = 320;	// bna
+int iGLOBAL_SCREENHEIGHT = 200; // bna
+#else
 int iGLOBAL_SCREENWIDTH = 640;	// bna
 int iGLOBAL_SCREENHEIGHT = 480; // bna
+#endif
 int iGLOBAL_SCREENBWIDE;
 int iG_SCREENWIDTH; // default screen width in bytes
 
