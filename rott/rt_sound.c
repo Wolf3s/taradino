@@ -153,7 +153,10 @@ int SD_Startup(boolean bombonerror)
 		SD_Shutdown();
 	}
 
-	FXMode = CLAMP(FXMode, 0, 1);
+	if (FXMode < 0 || FXMode > 1)
+	{
+		FXMode = 1;
+	}
 	if (FXMode == 0)
 	{
 		return (0);
@@ -819,7 +822,10 @@ int MU_Startup(boolean bombonerror)
 		MU_Shutdown();
 	}
 
-	MusicMode = CLAMP(MusicMode, 0, num_music_modules);
+	if (MusicMode < 0 || MusicMode >= num_music_modules)
+	{
+		MusicMode = 1;
+	}
 	if (MusicMode == 0)
 	{
 		return (0);
