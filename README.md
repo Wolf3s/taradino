@@ -5,12 +5,12 @@ as base.
 
 ## Building
 
-#Prerequisites
+# Prerequisites
 - [PS2SDK](https://github.com/ps2dev/ps2dev.git)
 - [libADLMIDI](https://github.com/Wohlstand/libADLMIDI.git)
 - [SDL2 Upstream branch](https://github.com/libsdl-org/SDL/tree/SDL2)
 
-#Build
+# Build
 
 Registred:
 ```sh
