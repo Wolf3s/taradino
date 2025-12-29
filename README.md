@@ -1,3 +1,41 @@
+# ps2-tarandino
+
+This is a homebrew port of the game Rise of the triad, targeting to PS2, Using tarandino
+as base.
+
+## Building
+
+#Prerequisites
+- [PS2SDK](https://github.com/ps2dev/ps2dev.git)
+- [libADLMIDI](https://github.com/Wohlstand/libADLMIDI.git)
+- [SDL2 Upstream branch](https://github.com/libsdl-org/SDL/tree/SDL2)
+
+#Build
+
+Registred:
+```sh
+cmake -S . -Bbuild -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=$PS2DEV/share/ps2dev.cmake
+cmake --build build
+```
+
+Shareware:
+```sh
+cmake -S . -Bbuild -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=$PS2DEV/share/ps2dev.cmake -DTARADINO_SHAREWARE=ON -DTARADINO_SUFFIX=shareware
+cmake --build build
+```
+
+## Controls:
+- Left analog stick - Movement
+- Right analog stick - Aiming
+- × - Space (Use/Open)
+- ○ - Esc
+- □ - PageDown (fly/look down)
+- △ - PageUp (fly/look up)
+- D-Pad Up/Down/Left/Right - Arrow keys
+- L1 - Free look
+- R1 - Attack
+- SELECT - Esc
+- START - Return (switch weapons)
 
 # Taradino
 
