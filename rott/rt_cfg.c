@@ -275,7 +275,11 @@ void SetSoundDefaultValues(void)
 	//
 	//  no config file, so select default values
 	//
+#ifdef __PS2__
+	MusicMode = 2; // libADLmidi
+#else
 	MusicMode = 1; // SDL2_Mixer
+#endif
 	FXMode = 1;
 	NumVoices = 8;
 	NumChannels = 2;
