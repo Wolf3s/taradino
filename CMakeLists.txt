@@ -80,6 +80,7 @@ endif()
 
 if(PS2)
 	set(TARADINO_EXEC taradino.elf)
+	target_compile_definitions(taradino PRIVATE __PS2__)	
 else()
 if(NOT DEFINED TARADINO_EXEC)
 	set(TARADINO_EXEC taradino)

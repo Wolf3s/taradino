@@ -91,11 +91,7 @@ boolean AutoDetailOn = true;
 int DoubleClickSpeed = 20;
 boolean BobbinOn = true;
 int Menuflipspeed = 15;
-#ifdef __PS2__
-int DetailLevel = 0; // HI DETAIL
-#else
 int DetailLevel = 2; // HI DETAIL
-#endif
 int fandc = 1;
 int blanktime = (2 * 60 * VBLCOUNTER);
 boolean ConfigLoaded = false;
@@ -281,13 +277,13 @@ void SetSoundDefaultValues(void)
 	MusicMode = 1; // SDL2_Mixer
 #endif
 	FXMode = 1;
-	NumVoices = 8;
-	NumChannels = 2;
 #ifdef __PS2__
-	NumBits = 8;
+	NumVoices = 1;
 #else
-	NumBits = 16;
+	NumVoices = 8;
 #endif
+	NumChannels = 2;
+	NumBits = 16;
 	stereoreversed = false;
 }
 

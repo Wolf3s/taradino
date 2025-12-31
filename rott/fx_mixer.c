@@ -244,8 +244,11 @@ static int GetSliceSize(void)
 	}
 
 	// Should never happen?
-
+#ifdef __PS2__
+	return 512;
+#else
 	return 1024;
+#endif
 }
 
 int FX_SetupCard(void)

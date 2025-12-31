@@ -81,7 +81,12 @@ static int ADL_Init(int samplerate)
 			return MUSIC_Error;
 		}
 		printf(" Using libADLMIDI %s\n", adl_linkedLibraryVersion());
-
+#ifdef __PS2__
+    	adl_switchEmulator(midi_player, ADLMIDI_EMU_DOSBOX);
+    	adl_setNumChips(midi_player, 1);
+    	adl_setNumFourOpsChn(midi_player, 4);
+    	adl_setFullRangeBrightness(midi_player, 0);
+#endif
 		adl_inited = 1;
 	}
 
