@@ -37,6 +37,9 @@ cmake --build build
 - SELECT - Esc
 - START - Return (switch weapons)
 
+# Known issues
+Tiny audio problem on the intro and cutscenes.
+
 # Taradino
 
 This is a port of Apogee's 3D action title Rise of the Triad, originally
